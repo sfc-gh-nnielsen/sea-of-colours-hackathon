@@ -57,7 +57,11 @@ from .weapon_forge import EconomyPolicy, WeaponPlay
 # Change something only if you mean it. `hold_at={"chaff": 1}` caps the rack at
 # one; `seek_blue_when_rack_empty=False` reverts to the baseline's behaviour of
 # only topping up when the VAULT is short.
-ECONOMY = EconomyPolicy()
+# seek_blue_always: ask for blue every night regardless of vault state,
+# not only when the rack is empty — keeps all three weapons funded.
+# buy_asap: drop the build threshold to just under the cheapest declared
+# weapon so ordnance is purchased the turn it becomes affordable.
+ECONOMY = EconomyPolicy(seek_blue_always=True, buy_asap=True)
 
 
 PLAYS: Tuple[WeaponPlay, ...] = (
@@ -73,6 +77,31 @@ PLAYS: Tuple[WeaponPlay, ...] = (
             "a rival that has just lit a pure is about to land on it, so "
             "blinding their probe cover at H1 refuses that landing for the "
             "full night and leaves the seam dark for us to approach"
+        ),
+    ),
+    WeaponPlay(
+        play_id="LOCKDOWN",
+        weapon="chaff",
+        when="redsign_theirs",
+        hour="super_early",
+        combines_with="blind_grab",
+        why=(
+            "cancelling their committed H1 resets their whole plan for the "
+            "night and leaves us free to work mid-value seams unopposed "
+            "while they replan from scratch"
+        ),
+    ),
+    WeaponPlay(
+        play_id="POKE",
+        weapon="snap",
+        when="always",
+        hour="early",
+        targets="rival_probes",
+        min_targets=1,
+        combines_with="standalone",
+        why=(
+            "killing the single eye lighting their best cell costs 100 blue "
+            "and costs them the landing cover they built — cheap and repeatable"
         ),
     ),
 )
