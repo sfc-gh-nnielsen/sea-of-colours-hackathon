@@ -1,0 +1,10 @@
+{
+  "team": "nnielsen",
+  "name": "v13",
+  "participants": [
+    "Neil Kim Nielsen"
+  ],
+  "menu_label": "NNIELSEN_V13 \u2014 nnielsen's agent (needs a Snowflake PAT \u00b7 slow)",
+  "entry": "harness:run",
+  "needs_llm": true
+}
