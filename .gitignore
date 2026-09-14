@@ -40,6 +40,8 @@ connections.toml
 secrets.toml
 *.pem
 *.key
+*.p8
+*.pub
 
 # Local file-backed store output (SOC_BACKEND=file) + sweep artifacts.
 # Generated CSVs are regenerable; the summary .md reports are docs (kept).
@@ -121,3 +123,4 @@ turnlab/data/*
 backstage/films/voice/models/
 backstage/films/voice/clips/
 backstage/films/voice/build/
+.cortex/plugins/*
