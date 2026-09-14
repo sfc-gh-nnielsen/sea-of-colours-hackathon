@@ -392,6 +392,17 @@ def plan_orbit_actions(
                 "skipped EMP build (blue surplus but 50% roll missed)"
             )
 
+    # When all three weapons are declared, chaff takes the stock elif slot
+    # and EMP is skipped in the same orbit. This block ensures EMP can be
+    # purchased alongside chaff when the rack needs it.
+    if (weapons_enabled
+            and emp_stock < dials.emp_stockpile_cap
+            and _afford_emp()
+            and not any(a.get("a") == "build_emp" for a in actions)):
+        actions.append({"a": "build_emp", "count": 1})
+        remaining -= emp_credit_cost
+        descriptors.append("built EMP (multi-weapon orbit buy)")
+
     # --- weapon-forge hook (installed by forge_install.py) ---
     # PLACEMENT IS LOAD-BEARING. This must sit with the stock weapon
     # branch (priority 3), BEFORE the probe magazine top-up — probes
