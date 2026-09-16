@@ -1,0 +1,10 @@
+{
+  "team": "iakabi",
+  "name": "reaper",
+  "participants": [
+    "Iakabi"
+  ],
+  "menu_label": "IAKABI_REAPER \u2014 iakabi's agent (needs a Snowflake PAT \u00b7 slow)",
+  "entry": "harness:run",
+  "needs_llm": true
+}
